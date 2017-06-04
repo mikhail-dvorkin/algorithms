@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class LinearAlgebra {
 	final static double EPS = 1e-9;
 
@@ -71,4 +73,58 @@ public class LinearAlgebra {
 		}
 		return c;
 	}
+
+	static double[][] pca(double[][] x, int number, int iters, Random rnd) {
+		int hei = x.length;
+		int wid = x[0].length;
+		double[][] coord = new double[number][hei];
+		for (int c = 0; c < number; c++) {
+			for (int j = 0; j < wid; j++) {
+				double av = 0;
+				for (int i = 0; i < hei; i++) {
+					av += x[i][j];
+				}
+				av /= hei;
+				for (int i = 0; i < hei; i++) {
+					x[i][j] -= av;
+				}
+			}
+			double[] r = new double[wid];
+			for (int j = 0; j < wid; j++) {
+				r[j] = rnd.nextGaussian();
+			}
+			for (int iter = 0; iter < iters; iter++) {
+				double[] s = new double[wid];
+				for (int i = 0; i < hei; i++) {
+					double scal = 0;
+					for (int j = 0; j < wid; j++) {
+						scal += r[j] * x[i][j];
+					}
+					for (int j = 0; j < wid; j++) {
+						s[j] += scal * x[i][j];
+					}
+				}
+				double norm = 0;
+				for (int j = 0; j < wid; j++) {
+					norm += s[j] * s[j];
+				}
+				norm = Math.sqrt(norm);
+				for (int j = 0; j < wid; j++) {
+					r[j] = s[j] / norm;
+				}
+			}
+			for (int i = 0; i < hei; i++) {
+				double scal = 0;
+				for (int j = 0; j < wid; j++) {
+					scal += r[j] * x[i][j];
+				}
+				coord[c][i] = scal;
+				for (int j = 0; j < wid; j++) {
+					x[i][j] -= r[j] * scal;
+				}
+			}
+		}
+		return coord;
+	}
+
 }
