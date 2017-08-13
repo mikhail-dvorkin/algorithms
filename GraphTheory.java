@@ -31,7 +31,7 @@ public class GraphTheory {
 		}
 	}
 	
-	public int[] eulerianCycle() {
+	public int[] eulerianCycleUndirected() {
 		int edges = 0;
 		for (ArrayList<Integer> list : nei) {
 			edges += list.size();
