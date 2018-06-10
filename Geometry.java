@@ -105,7 +105,7 @@ public class Geometry {
 				);
 	}
 
-	static int orientation4D(int x0, int y0, int z0, int x1, int y1, int z1, int x2, int y2, int z2, int x3, int y3, int z3) {
+	static int orientation3D(int x0, int y0, int z0, int x1, int y1, int z1, int x2, int y2, int z2, int x3, int y3, int z3) {
 		long a0 = x1 - x0;
 		long a1 = x2 - x0;
 		long a2 = x3 - x0;
