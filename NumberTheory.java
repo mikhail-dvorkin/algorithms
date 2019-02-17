@@ -248,6 +248,32 @@ public class NumberTheory {
 		return x;
 	}
 
+	static final int M = 1_000_000_007;
+
+	static int add(int a, int b) {
+		return (a + b) % M;
+	}
+
+	static int mul(int a, int b) {
+		return (int) ((a * (long) b) % M);
+	}
+
+	static int div(int a, int b) {
+		return mul(a, modInverse(b, M));
+	}
+
+	static int pow(int base, int p) {
+		if (p < 0) {
+			return pow(modInverse(base, M), -p);
+		}
+		if (p == 0) {
+			return 1;
+		}
+		int v = pow(base, p / 2);
+		v = mul(v, v);
+		return (p & 1) == 0 ? v : mul(v, base);
+	}
+
 	public static void main(String[] args) {
 		int[] xy = new int[2];
 		System.out.println(gcdExtended(42, 2017, xy));
