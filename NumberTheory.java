@@ -218,11 +218,13 @@ public class NumberTheory {
 		return true;
 	}
 	
-	private static long power(long base, long p, long modulo) {
-		if (p == 0)
+	public static long power(long base, long p, long modulo) {
+		if (p < 0) {
+			throw new IllegalArgumentException("" + p);
+		}
+		if (p == 0) {
 			return (modulo == 1) ? 0 : 1;
-		if (p == 1)
-			return base % modulo;
+		}
 		long v = power(base, p / 2, modulo);
 		v = (v * v) % modulo;
 		return (p & 1) == 0 ? v : (v * base) % modulo;
