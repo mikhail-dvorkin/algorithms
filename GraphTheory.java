@@ -8,6 +8,7 @@ public class GraphTheory {
 	int[] tIn, fUp;
 	int time;
 	ArrayList<Integer>[] nei;
+	ArrayList<Integer>[] neiBack;
 	int[][] c, f;
 	
 	public void dfsBridges(int v, int p) {
@@ -65,6 +66,50 @@ public class GraphTheory {
 						e[i][j] = e[i][k] + e[k][j];
 					}
 				}
+			}
+		}
+	}
+	
+	int[] scc;
+	int[] timeOutOrder;
+	int sccAmount;
+
+	void findStronglyConnectedComponents() {
+		mark = new boolean[n];
+		timeOutOrder = new int[n];
+		time = 0;
+		for (int i = 0; i < n; i++) {
+			if (!mark[i]) {
+				dfsSCC1(i);
+			}
+		}
+		scc = new int[n];
+		Arrays.fill(scc, -1);
+		sccAmount = 0;
+		for (int i = n - 1; i >= 0; i--) {
+			int v = timeOutOrder[i];
+			if (scc[v] == -1) {
+				dfsSCC2(v);
+				sccAmount++;
+			}
+		}
+	}
+
+	void dfsSCC1(int v) {
+		mark[v] = true;
+		for (int u : nei[v]) {
+			if (!mark[u]) {
+				dfsSCC1(u);
+			}
+		}
+		timeOutOrder[time++] = v;
+	}
+
+	void dfsSCC2(int v) {
+		scc[v] = sccAmount;
+		for (int u : neiBack[v]) {
+			if (scc[u] == -1) {
+				dfsSCC2(u);
 			}
 		}
 	}
