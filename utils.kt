@@ -11,8 +11,9 @@ private fun <E> MutableList<E>.pop() = removeAt(lastIndex)
 private fun <T, R> Iterable<T>.cartesianProduct(other: Iterable<R>) = flatMap { x -> other.map { y -> x to y } }
 private fun <T> Iterable<T>.cartesianSquare() = flatMap { x -> map { y -> x to y } }
 private fun IntProgression.size() = (last - first) / step + 1
-private fun LongProgression.size() = (last - first) / step + 1
 private fun Collection<Int>.mex() = (0..this.size).first { it !in this }
+private fun Int.countSignificantBits() = Int.SIZE_BITS - Integer.numberOfLeadingZeros(this)
+private fun Int.abs() = kotlin.math.abs(this)
 @Suppress("DEPRECATION")
 private fun eval(expression: String) = jdk.nashorn.api.scripting.NashornScriptEngineFactory().scriptEngine.eval(expression).toString()
 
