@@ -16,6 +16,12 @@ private fun Collection<Int>.mex() = (0..this.size).first { it !in this }
 @Suppress("DEPRECATION")
 private fun eval(expression: String) = jdk.nashorn.api.scripting.NashornScriptEngineFactory().scriptEngine.eval(expression).toString()
 
+private fun IntRange.binarySearch(predicate: (Int) -> Boolean): Int {
+	var (low, high) = this.first to this.last // must be false .. must be true
+	while (low + 1 < high) (low + (high - low) / 2).also { if (predicate(it)) high = it else low = it }
+	return high // first true
+}
+
 private val isOnlineJudge = System.getProperty("ONLINE_JUDGE") == "true"
 private val stdStreams = (true to true).apply  { if (!isOnlineJudge) {
 	if (!first) System.setIn(java.io.File("input.txt").inputStream())
