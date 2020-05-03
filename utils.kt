@@ -15,6 +15,11 @@ private fun IntProgression.size() = (last - first) / step + 1
 private fun Collection<Int>.mex() = (0..this.size).first { it !in this }
 private fun Int.countSignificantBits() = Int.SIZE_BITS - Integer.numberOfLeadingZeros(this)
 private fun Int.abs() = kotlin.math.abs(this)
+private fun Boolean.toInt() = if (this) 1 else 0
+private fun <T> Boolean.iif(onTrue: T, onFalse: T) = if (this) onTrue else onFalse
+private fun BooleanArray.getOrFalse(index: Int) = getOrNull(index) ?: false
+private operator fun <T> Iterable<T>.times(count: Int) = (0 until count).flatMap { this }
+private fun CharSequence.sorted() = toList().sorted().joinToString("")
 @Suppress("DEPRECATION")
 private fun eval(expression: String) = jdk.nashorn.api.scripting.NashornScriptEngineFactory().scriptEngine.eval(expression).toString()
 
