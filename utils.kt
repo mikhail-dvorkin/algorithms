@@ -1,5 +1,4 @@
 @file:Suppress("unused")
-
 private fun readLn() = readLine()!!
 private fun readInt() = readLn().toInt()
 private fun readStrings() = readLn().split(" ")
@@ -8,13 +7,17 @@ private fun readLongs() = readStrings().map { it.toLong() }
 
 private operator fun <T> List<T>.component6() = get(5)
 private fun <T> Iterable<T>.withReversed() = listOf(toList(), reversed())
-private fun <E> MutableList<E>.pop() = removeAt(lastIndex)
+private fun <T> List<T>.toPair() = component1() to component2()
+private fun <T> MutableList<T>.pop() = removeAt(lastIndex)
 private fun <T, R> Iterable<T>.cartesianProduct(other: Iterable<R>) = flatMap { x -> other.map { y -> x to y } }
 private fun <T> Iterable<T>.cartesianSquare() = flatMap { x -> map { y -> x to y } }
+private fun <T> Iterable<T>.cartesianTriangle() = withIndex().flatMap { x -> take(x.index).map { x.value to it } }
 private fun IntProgression.size() = (last - first) / step + 1
 private fun Collection<Int>.mex() = (0..this.size).first { it !in this }
 private fun Int.countSignificantBits() = Int.SIZE_BITS - Integer.numberOfLeadingZeros(this)
 private fun Int.abs() = kotlin.math.abs(this)
+private tailrec fun gcd(a: Int, b: Int): Int = if (a == 0) b else gcd(b % a, a)
+private fun dividedByGcd(a: Int, b: Int) = gcd(a, b).let { a / it to b / it }
 private fun Boolean.toInt() = if (this) 1 else 0
 private fun <T> Boolean.iif(onTrue: T, onFalse: T) = if (this) onTrue else onFalse
 private fun BooleanArray.getOrFalse(index: Int) = getOrNull(index) ?: false
