@@ -3,25 +3,35 @@ import java.util.*;
 public class DataStructures {
 	public static class FenwickTree {
 		long[] t;
-		int n;
 
 		public FenwickTree(int n) {
-			this.n = n;
 			t = new long[n];
 		}
 
 		public void add(int i, long value) {
-			for (; i < n; i += (i + 1) & -(i + 1)) {
+			for (; i < t.length; i += (i + 1) & -(i + 1)) {
 				t[i] += value;
 			}
 		}
 
 		public long sum(int i) {
 			long res = 0;
-			for (; i >= 0; i -= (i + 1) & -(i + 1)) {
+			for (i--; i >= 0; i -= (i + 1) & -(i + 1)) {
 				res += t[i];
 			}
 			return res;
+		}
+
+		public long sum(int start, int end) {
+			return sum(end) - sum(start);
+		}
+
+		public long get(int i) {
+			return sum(i, i + 1);
+		}
+
+		public void set(int i, long value) {
+			add(i, value - get(i));
 		}
 	}
 
