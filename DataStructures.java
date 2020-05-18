@@ -24,11 +24,11 @@ public class DataStructures {
 			return res;
 		}
 	}
-	
+
 	public static class SparseTable {
 		int[][] min;
 		int[][] max;
-		
+
 		public SparseTable(int[] a) {
 			int n = a.length;
 			int t = 1;
@@ -46,12 +46,12 @@ public class DataStructures {
 				}
 			}
 		}
-		
+
 		public int min(int from, int to) {
 			int j = Integer.SIZE - 1 - Integer.numberOfLeadingZeros(to - from);
 			return Math.min(min[j][from], min[j][to - (1 << j)]);
 		}
-		
+
 		public int max(int from, int to) {
 			int j = Integer.SIZE - 1 - Integer.numberOfLeadingZeros(to - from);
 			return Math.max(max[j][from], max[j][to - (1 << j)]);
