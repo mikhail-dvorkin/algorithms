@@ -14,7 +14,11 @@ private fun <T> Iterable<T>.cartesianSquare() = flatMap { x -> map { y -> x to y
 private fun <T> Iterable<T>.cartesianTriangle() = withIndex().flatMap { x -> take(x.index).map { it to x.value } }
 private fun IntProgression.size() = (last - first) / step + 1
 private fun Collection<Int>.mex() = (0..this.size).first { it !in this }
+private fun Collection<Int>.sumLong() = fold(0L, Long::plus)
+private fun Int.bit(index: Int) = shr(index) and 1
+private fun Int.hasBit(index: Int) = bit(index) != 0
 private fun Int.countSignificantBits() = Int.SIZE_BITS - Integer.numberOfLeadingZeros(this)
+private fun Int.oneIndices() = (0 until countSignificantBits()).filter { bit(it) != 0 }
 private fun Int.abs() = kotlin.math.abs(this)
 private tailrec fun gcd(a: Int, b: Int): Int = if (a == 0) b else gcd(b % a, a)
 private fun dividedByGcd(a: Int, b: Int) = gcd(a, b).let { a / it to b / it }
