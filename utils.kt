@@ -23,6 +23,7 @@ private fun Int.abs() = kotlin.math.abs(this)
 private tailrec fun gcd(a: Int, b: Int): Int = if (a == 0) b else gcd(b % a, a)
 private fun dividedByGcd(a: Int, b: Int) = gcd(a, b).let { a / it to b / it }
 private fun minusOnePow(i: Int) = 1 - ((i and 1) shl 1)
+private infix fun Int.towards(to: Int) = if (to > this) this..to else this downTo to
 private fun Boolean.toInt() = if (this) 1 else 0
 private fun <T> Boolean.iif(onTrue: T, onFalse: T) = if (this) onTrue else onFalse
 private fun BooleanArray.getOrFalse(index: Int) = getOrNull(index) ?: false
