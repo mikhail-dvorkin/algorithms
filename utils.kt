@@ -15,6 +15,7 @@ private fun <T> Iterable<T>.cartesianTriangle() = withIndex().flatMap { x -> tak
 private fun IntProgression.size() = (last - first) / step + 1
 private fun Collection<Int>.mex() = (0..this.size).first { it !in this }
 private fun Collection<Int>.sumLong() = fold(0L, Long::plus)
+private fun IntArray.reversedPermutation() = IntArray(size).also { for (i in indices) it[this[i]] = i }
 private fun Int.bit(index: Int) = shr(index) and 1
 private fun Int.hasBit(index: Int) = bit(index) != 0
 private fun Int.countSignificantBits() = Int.SIZE_BITS - Integer.numberOfLeadingZeros(this)
