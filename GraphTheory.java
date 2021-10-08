@@ -26,7 +26,10 @@ public class GraphTheory {
 				dfsBridges(u, v);
 				fUp[v] = Math.min(fUp[v], fUp[u]);
 				if (fUp[u] > tIn[v]) {
-					
+					// is bridge
+				}
+				if (fUp[u] >= tIn[v]) {
+					// is articulation point, except for root
 				}
 			}
 		}
