@@ -40,6 +40,26 @@ private fun IntRange.binarySearch(predicate: (Int) -> Boolean): Int {
 	return high // first true
 }
 
+fun Int.toModular() = Modular(this)//toDouble()
+class Modular {
+	companion object {
+		const val M = 998244353
+	}
+	val x: Int
+	@Suppress("ConvertSecondaryConstructorToPrimary")
+	constructor(value: Int) { x = (value % M).let { if (it < 0) it + M else it } }
+	operator fun plus(that: Modular) = Modular((x + that.x) % M)
+	operator fun minus(that: Modular) = Modular((x + M - that.x) % M)
+	operator fun times(that: Modular) = (x.toLong() * that.x % M).toInt().toModular()
+	fun modInverse() = Modular(x.toBigInteger().modInverse(M.toBigInteger()).toInt())
+	operator fun div(that: Modular) = times(that.modInverse())
+	override fun toString() = x.toString()
+}
+operator fun Int.plus(that: Modular) = Modular(this) + that
+operator fun Int.minus(that: Modular) = Modular(this) - that
+operator fun Int.times(that: Modular) = Modular(this) * that
+operator fun Int.div(that: Modular) = Modular(this) / that
+
 private val isOnlineJudge = System.getProperty("ONLINE_JUDGE") == "true"
 private val stdStreams = (true to true).apply  { if (!isOnlineJudge) {
 	if (!first) System.setIn(java.io.File("input.txt").inputStream())
