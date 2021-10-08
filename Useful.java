@@ -22,7 +22,7 @@ public class Useful {
 	}
 	
 	static int dirTo(int x1, int y1, int x2, int y2) {
-		if (x1 == x2) {
+		if (x1 == x2) { // Math.abs(x1 - x2) < Math.abs(y1 - y2) for approximate direction
 			return y1 < y2 ? 1 : 3;
 		}
 		return x1 < x2 ? 0 : 2;
