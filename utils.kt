@@ -21,6 +21,7 @@ private fun Int.hasBit(index: Int) = bit(index) != 0
 private fun Int.countSignificantBits() = Int.SIZE_BITS - Integer.numberOfLeadingZeros(this)
 private fun Int.oneIndices() = (0 until countSignificantBits()).filter { bit(it) != 0 }
 private fun Int.abs() = kotlin.math.abs(this)
+private fun Int.sqr() = this * this
 private tailrec fun gcd(a: Int, b: Int): Int = if (a == 0) b else gcd(b % a, a)
 private fun dividedByGcd(a: Int, b: Int) = gcd(a, b).let { a / it to b / it }
 private fun minusOnePow(i: Int) = 1 - ((i and 1) shl 1)
