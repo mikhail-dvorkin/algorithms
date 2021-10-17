@@ -8,7 +8,6 @@ private fun readLongs() = readStrings().map { it.toLong() }
 private operator fun <T> List<T>.component6() = get(5)
 private fun <T> Iterable<T>.withReversed() = listOf(toList(), reversed())
 private fun <T> List<T>.toPair() = component1() to component2()
-private fun <T> MutableList<T>.pop() = removeAt(lastIndex)
 private fun <T, R> Iterable<T>.cartesianProduct(other: Iterable<R>) = flatMap { x -> other.map { y -> x to y } }
 private fun <T> Iterable<T>.cartesianSquare() = flatMap { x -> map { y -> x to y } }
 private fun <T> Iterable<T>.cartesianTriangle() = withIndex().flatMap { x -> take(x.index).map { it to x.value } }
