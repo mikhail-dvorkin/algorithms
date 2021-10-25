@@ -13,7 +13,6 @@ private fun <T> Iterable<T>.cartesianSquare() = flatMap { x -> map { y -> x to y
 private fun <T> Iterable<T>.cartesianTriangle() = withIndex().flatMap { x -> take(x.index).map { it to x.value } }
 private fun IntProgression.size() = (last - first) / step + 1
 private fun Collection<Int>.mex() = (0..this.size).first { it !in this }
-private fun Collection<Int>.sumLong() = fold(0L, Long::plus)
 private fun Long.coerceInInt() = if (this >= Int.MAX_VALUE) Int.MAX_VALUE else if (this <= Int.MIN_VALUE) Int.MIN_VALUE else toInt()
 private fun IntArray.reversedPermutation() = IntArray(size).also { for (i in indices) it[this[i]] = i }
 private fun Int.bit(index: Int) = shr(index) and 1
