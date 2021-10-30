@@ -39,8 +39,8 @@ private fun IntRange.binarySearch(predicate: (Int) -> Boolean): Int {
 	return high // first true
 }
 
-fun Int.toModular() = Modular(this)//toDouble()
-class Modular {
+private fun Int.toModular() = Modular(this)//toDouble()
+private class Modular {
 	companion object {
 		const val M = 998244353
 	}
@@ -54,10 +54,10 @@ class Modular {
 	operator fun div(that: Modular) = times(that.modInverse())
 	override fun toString() = x.toString()
 }
-operator fun Int.plus(that: Modular) = Modular(this) + that
-operator fun Int.minus(that: Modular) = Modular(this) - that
-operator fun Int.times(that: Modular) = Modular(this) * that
-operator fun Int.div(that: Modular) = Modular(this) / that
+private operator fun Int.plus(that: Modular) = Modular(this) + that
+private operator fun Int.minus(that: Modular) = Modular(this) - that
+private operator fun Int.times(that: Modular) = Modular(this) * that
+private operator fun Int.div(that: Modular) = Modular(this) / that
 
 private val isOnlineJudge = System.getProperty("ONLINE_JUDGE") == "true"
 private val stdStreams = (true to true).apply  { if (!isOnlineJudge) {
