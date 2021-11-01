@@ -34,7 +34,7 @@ private fun CharSequence.sorted() = toList().sorted().joinToString("")
 private fun eval(expression: String) = jdk.nashorn.api.scripting.NashornScriptEngineFactory().scriptEngine.eval(expression).toString()
 
 private fun IntRange.binarySearch(predicate: (Int) -> Boolean): Int {
-	var (low, high) = this.first to this.last // must be false .. must be true
+	var (low, high) = this.first to this.last // must be false ... must be true
 	while (low + 1 < high) (low + (high - low) / 2).also { if (predicate(it)) high = it else low = it }
 	return high // first true
 }
