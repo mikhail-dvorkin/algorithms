@@ -64,5 +64,6 @@ private val stdStreams = (true to true).apply  { if (!isOnlineJudge) {
 	if (!first) System.setIn(java.io.File("input.txt").inputStream())
 	if (!second) System.setOut(java.io.PrintStream("output.txt"))
 }}
+private fun setIn(input: String) = System.setIn(input.byteInputStream())
 private val bufferedReader = java.io.BufferedReader(java.io.InputStreamReader(System.`in`))
 private fun readLn2() = bufferedReader.readLine()
