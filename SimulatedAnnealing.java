@@ -84,6 +84,9 @@ public class SimulatedAnnealing {
 					if (recession == settings.recessionLimit) {
 						break;
 					}
+					//TODO better:
+					//t = t_start * (t_final / t_start) ** part_of_time_passed
+					//p = exp((cur_result - new_result) / t)
 					double barrier = Math.exp(-1.0 * dEnergy * iter / settings.temp0);
 					accept = r.nextDouble() < barrier;
 				}
