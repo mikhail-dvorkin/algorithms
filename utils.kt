@@ -39,7 +39,7 @@ private fun IntRange.binarySearch(predicate: (Int) -> Boolean): Int {
 	return high // first true
 }
 
-private fun Int.toModular() = Modular(this)//toDouble()
+private fun Int.toModular() = Modular(this)//toDouble(); typealias Modular = Double
 private class Modular {
 	companion object {
 		const val M = 998244353
