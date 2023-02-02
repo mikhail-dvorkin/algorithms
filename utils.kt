@@ -30,7 +30,7 @@ private fun <T> Boolean.iif(onTrue: T, onFalse: T) = if (this) onTrue else onFal
 private fun BooleanArray.getOrFalse(index: Int) = getOrNull(index) ?: false
 private operator fun <T> Iterable<T>.times(count: Int) = (0 until count).flatMap { this }
 private fun CharSequence.sorted() = toList().sorted().joinToString("")
-@Suppress("DEPRECATION")
+@Suppress("DEPRECATION", "removal")
 private fun eval(expression: String) = jdk.nashorn.api.scripting.NashornScriptEngineFactory().scriptEngine.eval(expression).toString()
 
 private fun IntRange.binarySearch(predicate: (Int) -> Boolean): Int {
