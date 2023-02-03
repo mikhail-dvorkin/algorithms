@@ -10,7 +10,7 @@ private fun <T> Iterable<T>.withReversed() = listOf(toList(), reversed())
 private fun <T> List<T>.toPair() = get(0) to get(1)
 private fun <T> List<List<T>>.transposed() = List(this[0].size) { i -> map { it[i] } }
 private fun List<IntArray>.transposedIntArray() = List(this[0].size) { i -> map { it[i] }.toIntArray() }
-private fun List<String>.transposedStrings() = List(this[0].length) { i -> buildString { this@transposedStrings.forEach { append(it[i]) } } }
+private fun List<String>.transposedStrings() = List(this[0].length) { i -> buildString(this@transposedStrings.size) { this@transposedStrings.forEach { append(it[i]) } } }
 private fun <T, R> Iterable<T>.cartesianProduct(other: Iterable<R>) = flatMap { x -> other.map { y -> x to y } }
 private fun <T> Iterable<T>.cartesianSquare() = flatMap { x -> map { y -> x to y } }
 private fun <T> Iterable<T>.cartesianTriangle() = withIndex().flatMap { x -> take(x.index).map { it to x.value } }
@@ -32,7 +32,9 @@ private fun Boolean.toInt() = if (this) 1 else 0
 private fun <T> Boolean.iif(onTrue: T, onFalse: T) = if (this) onTrue else onFalse
 private fun BooleanArray.getOrFalse(index: Int) = getOrNull(index) ?: false
 private operator fun <T> Iterable<T>.times(count: Int) = (0 until count).flatMap { this }
-private fun CharSequence.sorted() = toList().sorted().joinToString("")
+private fun CharSequence.toCharArray() = CharArray(this.length) { this[it] }
+private fun CharSequence.sorted() = toCharArray().apply { sort() }.concatToString()
+private fun String(n: Int, init: (Int) -> Char) = buildString(n) { repeat(n) { append(init(it)) } }
 @Suppress("DEPRECATION", "removal")
 private fun eval(expression: String) = jdk.nashorn.api.scripting.NashornScriptEngineFactory().scriptEngine.eval(expression).toString()
 
