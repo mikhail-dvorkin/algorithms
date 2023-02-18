@@ -77,3 +77,4 @@ private val stdStreams = (true to true).apply  { if (!isOnlineJudge) {
 private fun setIn(input: String) = System.setIn(input.byteInputStream())
 private val bufferedReader = java.io.BufferedReader(java.io.InputStreamReader(System.`in`))
 private fun readLn2() = bufferedReader.readLine()
+private fun println(vararg msg: Any, sep: String=" ", end: String="\n", flush: Boolean=false) { print(msg.joinToString(sep, "", end)); if (flush) System.out.flush() }
