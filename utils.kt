@@ -6,8 +6,11 @@ private fun readInts() = readStrings().map { it.toInt() }
 private fun readLongs() = readStrings().map { it.toLong() }
 
 private operator fun <T> List<T>.component6() = get(5)
+private fun <T> List<T>.getCycled(index: Int) = getOrElse(index) { get(if (index >= 0) index % size else lastIndex - index.inv() % size) }
 private fun <T> Iterable<T>.withReversed() = listOf(toList(), reversed())
 private fun <T> List<T>.toPair() = get(0) to get(1)
+private fun <T> List<T>.shifted(shift: Int) = drop(shift) + take(shift)
+private fun <T> List<T>.allShifts() = List(size) { shifted(it) }
 private fun <T> List<List<T>>.transposed() = List(this[0].size) { i -> map { it[i] } }
 private fun List<IntArray>.transposedIntArray() = List(this[0].size) { i -> map { it[i] }.toIntArray() }
 private fun List<String>.transposedStrings() = List(this[0].length) { i -> buildString(this@transposedStrings.size) { this@transposedStrings.forEach { append(it[i]) } } }
