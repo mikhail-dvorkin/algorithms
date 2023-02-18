@@ -44,25 +44,30 @@ private fun IntRange.binarySearch(predicate: (Int) -> Boolean): Int {
 	return high // first true
 }
 
-private fun Int.toModular() = Modular(this)//toDouble(); typealias Modular = Double
-private class Modular {
+//typealias Modular = Double; fun Number.toModular() = toDouble(); fun Number.toModularUnsafe() = toDouble()
+@JvmInline
+@Suppress("NOTHING_TO_INLINE")
+private value class Modular(val x: Int) {
 	companion object {
 		const val M = 998244353
+		val MOD_BIG_INTEGER = M.toBigInteger()
+		inline fun from(x: Int) = Modular(if (x >= 0) { if (x < M) x else x % M } else { M - 1 - x.inv() % M })
+		inline fun from(x: Long) = Modular((if (x >= 0) { if (x < M) x else x % M } else { M - 1 - x.inv() % M }).toInt())
+		inline fun from(x: java.math.BigInteger) = Modular(x.mod(MOD_BIG_INTEGER).toInt())
+		inline fun from(x: String) = Modular(x.fold(0L) { acc, c -> (c - '0' + 10 * acc) % M }.toInt())
 	}
-	val x: Int
-	@Suppress("ConvertSecondaryConstructorToPrimary")
-	constructor(value: Int) { x = (value % M).let { if (it < 0) it + M else it } }
-	operator fun plus(that: Modular) = Modular((x + that.x) % M)
-	operator fun minus(that: Modular) = Modular((x + M - that.x) % M)
-	operator fun times(that: Modular) = (x.toLong() * that.x % M).toInt().toModular()
-	private fun modInverse() = Modular(x.toBigInteger().modInverse(M.toBigInteger()).toInt())
-	operator fun div(that: Modular) = times(that.modInverse())
+	inline operator fun plus(that: Modular) = Modular((x + that.x).let { if (it >= M) it - M else it })
+	inline operator fun minus(that: Modular) = Modular((x - that.x).let { if (it < 0) it + M else it })
+	inline operator fun times(that: Modular) = Modular((x.toLong() * that.x % M).toInt())
+	inline operator fun div(that: Modular) = times(that.inverse())
+	inline fun inverse() = Modular(x.toBigInteger().modInverse(MOD_BIG_INTEGER).toInt())
 	override fun toString() = x.toString()
 }
-private operator fun Int.plus(that: Modular) = Modular(this) + that
-private operator fun Int.minus(that: Modular) = Modular(this) - that
-private operator fun Int.times(that: Modular) = Modular(this) * that
-private operator fun Int.div(that: Modular) = Modular(this) / that
+private fun Int.toModularUnsafe() = Modular(this)
+private fun Int.toModular() = Modular.from(this)
+private fun Long.toModular() = Modular.from(this)
+private fun java.math.BigInteger.toModular() = Modular.from(this)
+private fun String.toModular() = Modular.from(this)
 
 private val isOnlineJudge = System.getProperty("ONLINE_JUDGE") == "true"
 private val stdStreams = (true to true).apply  { if (!isOnlineJudge) {
