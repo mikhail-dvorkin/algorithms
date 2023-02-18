@@ -52,12 +52,7 @@ private fun IntRange.binarySearch(predicate: (Int) -> Boolean): Int {
 @Suppress("NOTHING_TO_INLINE")
 private value class Modular(val x: Int) {
 	companion object {
-		const val M = 998244353
-		val MOD_BIG_INTEGER = M.toBigInteger()
-		inline fun from(x: Int) = Modular(if (x >= 0) { if (x < M) x else x % M } else { M - 1 - x.inv() % M })
-		inline fun from(x: Long) = Modular((if (x >= 0) { if (x < M) x else x % M } else { M - 1 - x.inv() % M }).toInt())
-		inline fun from(x: java.math.BigInteger) = Modular(x.mod(MOD_BIG_INTEGER).toInt())
-		inline fun from(x: String) = Modular(x.fold(0L) { acc, c -> (c - '0' + 10 * acc) % M }.toInt())
+		const val M = 998244353; val MOD_BIG_INTEGER = M.toBigInteger()
 	}
 	inline operator fun plus(that: Modular) = Modular((x + that.x).let { if (it >= M) it - M else it })
 	inline operator fun minus(that: Modular) = Modular((x - that.x).let { if (it < 0) it + M else it })
@@ -67,10 +62,10 @@ private value class Modular(val x: Int) {
 	override fun toString() = x.toString()
 }
 private fun Int.toModularUnsafe() = Modular(this)
-private fun Int.toModular() = Modular.from(this)
-private fun Long.toModular() = Modular.from(this)
-private fun java.math.BigInteger.toModular() = Modular.from(this)
-private fun String.toModular() = Modular.from(this)
+private fun Int.toModular() = Modular(if (this >= 0) { if (this < Modular.M) this else this % Modular.M } else { Modular.M - 1 - inv() % Modular.M })
+private fun Long.toModular() = Modular((if (this >= 0) { if (this < Modular.M) this else this % Modular.M } else { Modular.M - 1 - inv() % Modular.M }).toInt())
+private fun java.math.BigInteger.toModular() = Modular(mod(Modular.MOD_BIG_INTEGER).toInt())
+private fun String.toModular() = Modular(fold(0L) { acc, c -> (c - '0' + 10 * acc) % Modular.M }.toInt())
 
 private val isOnlineJudge = System.getProperty("ONLINE_JUDGE") == "true"
 private val stdStreams = (true to true).apply  { if (!isOnlineJudge) {
