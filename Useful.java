@@ -7,6 +7,15 @@ public class Useful {
 	public static final int[] DY8 = new int[]{0, 1, 0, -1, 1, 1, -1, -1};
 	public static final String[] DIGITAL = new String[]{"+++ +++", "  +  + ", "+ +++ +", "+ ++ ++", " +++ + ", "++ + ++", "++ ++++", "+ +  + ", "+++++++", "++++ ++"};
 	
+	static void submasks(int mask) {
+		for (int submask = mask;; submask = ((submask - 1) & mask)) {
+			System.out.println(submask);
+			if (submask == 0) {
+				break;
+			}
+		}
+	}
+
 	static int[][] cnk = new int[777][777];
 	static {
 		for (int i = 0; i < cnk.length; i++) {
