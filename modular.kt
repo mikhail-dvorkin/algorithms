@@ -26,3 +26,10 @@ private value class ModularArray(val data: IntArray) {
 	operator fun set(index: Int, value: Modular) { data[index] = value.x }
 }
 private inline fun ModularArray(n: Int, init: (Int) -> Modular) = ModularArray(IntArray(n) { init(it).x })
+
+private val factorials = mutableListOf(1.toModularUnsafe())
+private fun factorial(n: Int): Modular {
+	while (n >= factorials.size) factorials.add(factorials.last() * factorials.size.toModularUnsafe())
+	return factorials[n]
+}
+private fun cnk(n: Int, k: Int) = factorial(n) / factorial(k) / factorial(n - k)
