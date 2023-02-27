@@ -2,6 +2,7 @@
 
 //typealias Modular = Double; fun Number.toModular() = toDouble(); fun Number.toModularUnsafe() = toDouble()
 //typealias ModularArray = DoubleArray; val ModularArray.data; get() = this
+
 @JvmInline
 @Suppress("NOTHING_TO_INLINE")
 private value class Modular(val x: Int) {
@@ -20,6 +21,7 @@ private fun Int.toModular() = Modular(if (this >= 0) { if (this < Modular.M) thi
 private fun Long.toModular() = Modular((if (this >= 0) { if (this < Modular.M) this else this % Modular.M } else { Modular.M - 1 - inv() % Modular.M }).toInt())
 private fun java.math.BigInteger.toModular() = Modular(mod(Modular.MOD_BIG_INTEGER).toInt())
 private fun String.toModular() = Modular(fold(0L) { acc, c -> (c - '0' + 10 * acc) % Modular.M }.toInt())
+
 @JvmInline
 private value class ModularArray(val data: IntArray) {
 	operator fun get(index: Int) = data[index].toModularUnsafe()
