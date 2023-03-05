@@ -6,6 +6,7 @@ public class Useful {
 	public static final int[] DX8 = new int[]{1, 0, -1, 0, 1, -1, -1, 1};
 	public static final int[] DY8 = new int[]{0, 1, 0, -1, 1, 1, -1, -1};
 	public static final String[] DIGITAL = new String[]{"+++ +++", "  +  + ", "+ +++ +", "+ ++ ++", " +++ + ", "++ + ++", "++ ++++", "+ +  + ", "+++++++", "++++ ++"};
+	public static final int[] MONTHS = new int[]{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 	
 	static void submasks(int mask) {
 		for (int submask = mask;; submask = ((submask - 1) & mask)) {
