@@ -25,6 +25,8 @@ private fun Int.bit(index: Int) = shr(index) and 1
 private fun Int.hasBit(index: Int) = bit(index) != 0
 private fun Int.countSignificantBits() = Int.SIZE_BITS - Integer.numberOfLeadingZeros(this)
 private fun Int.oneIndices() = (0 until countSignificantBits()).filter { bit(it) != 0 }
+private fun encodeShorts(y: Int, x: Int) = (y shl 16) or x
+private fun decodeShorts(code: Int) = (code shr 16) to (code and 0xFFFF)
 private fun Int.abs() = kotlin.math.abs(this)
 private fun Int.sqr() = this * this
 private tailrec fun gcd(a: Int, b: Int): Int = if (a == 0) b else gcd(b % a, a)
