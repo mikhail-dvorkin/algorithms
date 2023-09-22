@@ -2,6 +2,7 @@
 private fun readInt() = readln().toInt()
 private fun readStrings() = readln().split(" ")
 private fun readInts() = readStrings().map { it.toInt() }
+private fun readIntArray() = readln().parseIntArray()
 private fun readLongs() = readStrings().map { it.toLong() }
 
 private operator fun <T> List<T>.component6() = get(5)
@@ -45,6 +46,21 @@ private fun IntRange.binarySearch(predicate: (Int) -> Boolean): Int {
 	var (low, high) = this.first to this.last // must be false ... must be true
 	while (low + 1 < high) (low + (high - low) / 2).also { if (predicate(it)) high = it else low = it }
 	return high // first true
+}
+
+private fun String.parseIntArray(): IntArray {
+	val result = IntArray(count { it == ' ' } + 1)
+	var i = 0; var value = 0
+	for (c in this) {
+		if (c != ' ') {
+			value = value * 10 + c.code - '0'.code
+			continue
+		}
+		result[i++] = value
+		value = 0
+	}
+	result[i] = value
+	return result
 }
 
 private val isOnlineJudge = System.getProperty("ONLINE_JUDGE") == "true"
