@@ -67,7 +67,7 @@ private fun String.parseIntArray(): IntArray {
 }
 
 private val isOnlineJudge = System.getProperty("ONLINE_JUDGE") == "true"
-private val stdStreams = (true to true).apply  { if (!isOnlineJudge) {
+private val stdStreams = (true to true).apply { if (!isOnlineJudge) {
 	if (!first) System.setIn(java.io.File("input.txt").inputStream())
 	if (!second) System.setOut(java.io.PrintStream("output.txt"))
 }}
