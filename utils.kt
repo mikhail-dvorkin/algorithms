@@ -24,8 +24,10 @@ private fun IntProgression.size() = (last - first) / step + 1
 private fun Collection<Int>.mex() = (0..this.size).first { it !in this }
 private fun Long.coerceInInt() = if (this >= Int.MAX_VALUE) Int.MAX_VALUE else if (this <= Int.MIN_VALUE) Int.MIN_VALUE else toInt()
 private fun IntArray.reversedPermutation() = IntArray(size).also { for (i in indices) it[this[i]] = i }
-private fun Int.bit(index: Int) = shr(index) and 1
+//private operator fun Int.get(index: Int) = ushr(index) and 1
+private fun Int.bit(index: Int) = ushr(index) and 1
 private fun Int.hasBit(index: Int) = bit(index) != 0
+private fun Int.setBit(index: Int) = or(1 shl index)
 private fun Int.countSignificantBits() = Int.SIZE_BITS - Integer.numberOfLeadingZeros(this)
 private fun Int.oneIndices() = (0 until countSignificantBits()).filter { bit(it) != 0 }
 private infix fun Int.with(that: Int) = (toLong() shl 32) or that.toLong()
