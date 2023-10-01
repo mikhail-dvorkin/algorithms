@@ -31,8 +31,9 @@ private fun Int.setBit(index: Int) = or(1 shl index)
 private fun Int.countSignificantBits() = Int.SIZE_BITS - Integer.numberOfLeadingZeros(this)
 private fun Int.oneIndices() = (0 until countSignificantBits()).filter { bit(it) != 0 }
 private infix fun Int.with(that: Int) = (toLong() shl 32) or that.toLong()
-private fun encodeShorts(a: Int, b: Int) = (a shl 16) or b
-private fun decodeShorts(code: Int) = (code ushr 16) to (code and 0xFFFF)
+private infix fun Int.withShort(that: Int) = shl(16) or that
+private fun decode(code: Long) = (code ushr 32).toInt() to code.toInt()
+private fun decodeShort(code: Int) = (code ushr 16) to (code and 0xFFFF)
 private fun Int.abs() = kotlin.math.abs(this)
 private fun Int.sqr() = this * this
 private infix fun Int.mod(other: Int) = (this % other).let { it + (other and (((it xor other) and (it or -it)) shr 31)) }
