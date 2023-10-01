@@ -9,7 +9,7 @@ private operator fun <T> List<T>.component6() = get(5)
 private fun <T> List<T>.getCycled(index: Int) = getOrElse(index) { get(if (index >= 0) index % size else lastIndex - index.inv() % size) }
 private fun <T> Iterable<T>.withReversed() = listOf(toList(), reversed())
 private fun <T> List<T>.toPair() = get(0) to get(1)
-private inline fun <E> MutableList<E?>.computeIfNull(key: Int, defaultValue: () -> E) = get(key)?.also { return it } ?: defaultValue().also { set(key, it) }
+private inline fun <E> MutableList<E?>.computeIfNull(key: Int, defaultValue: () -> E) = get(key) ?: defaultValue().also { set(key, it) }
 private inline fun <T, R : Comparable<R>> Iterable<T>.minByAndValue(crossinline selector: (T) -> R) = asSequence().map { it to selector(it) }.minBy { it.second }
 private inline fun <T, R : Comparable<R>> Iterable<T>.maxByAndValue(crossinline selector: (T) -> R) = asSequence().map { it to selector(it) }.maxBy { it.second }
 private fun <T> List<T>.shifted(shift: Int) = drop(shift) + take(shift)
