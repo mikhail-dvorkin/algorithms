@@ -1,4 +1,6 @@
 @file:Suppress("unused")
+private fun solve() {}
+
 private fun readInt() = readln().toInt()
 private fun readStrings() = readln().split(" ")
 private fun readInts() = readStrings().map { it.toInt() }
@@ -83,4 +85,21 @@ private val `in` = System.`in`.bufferedReader()
 private val out = System.out.bufferedWriter()
 private fun readln() = `in`.readLine()
 private fun println(vararg msg: Any, sep: String=" ", end: String="\n", flush: Boolean=false) { print(msg.joinToString(sep, "", end)); if (flush) System.out.flush() }
+
+fun mainPerTestWithTime() {
+	val tests = readInt()
+	val startTime = System.currentTimeMillis()
+	var prevTime = startTime
+	repeat(tests) {
+		println("Case #${it + 1}: ${solve()}")
+		val curTime = System.currentTimeMillis()
+		if (curTime > prevTime + 1000) {
+			System.err.println("${((it + 1) * 100.0 / tests).toInt()}%\t${(curTime - startTime) / 1000.0}s")
+			prevTime = curTime
+		}
+	}
+	out.close()
+}
+
+fun main() = repeat(readInt()) { solve() }.also { out.close() }
 	
