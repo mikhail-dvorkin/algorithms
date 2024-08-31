@@ -2,6 +2,7 @@
 
 //typealias Modular = Double; fun Number.toModular() = toDouble(); fun Number.toModularUnsafe() = toDouble()
 //typealias ModularArray = DoubleArray; val ModularArray.data; get() = this
+private fun Double.inverse() = 1 / this
 
 @JvmInline
 @Suppress("NOTHING_TO_INLINE")
