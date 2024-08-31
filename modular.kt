@@ -34,6 +34,7 @@ private fun String.toModular() = Modular(fold(0L) { acc, c -> (c - '0' + 10 * ac
 private value class ModularArray(val data: IntArray) {
 	operator fun get(index: Int) = data[index].toModularUnsafe()
 	operator fun set(index: Int, value: Modular) { data[index] = value.x }
+	fun sum() = (data.sumOf { it.toLong() } % Modular.M).toInt().toModularUnsafe()
 }
 private inline fun ModularArray(n: Int, init: (Int) -> Modular) = ModularArray(IntArray(n) { init(it).x })
 
