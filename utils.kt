@@ -126,4 +126,3 @@ fun mainPerTestWithTime() {
 }
 
 fun main() = repeat(readInt()) { solve() }.also { out.close() }
-	
