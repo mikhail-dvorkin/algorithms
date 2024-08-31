@@ -23,6 +23,7 @@ private fun List<String>.transposedStrings() = List(this[0].length) { i -> build
 private fun <T, R> Iterable<T>.cartesianProduct(other: Iterable<R>) = flatMap { x -> other.map { y -> x to y } }
 private fun <T> Iterable<T>.cartesianSquare() = flatMap { x -> map { y -> x to y } }
 private fun <T> Iterable<T>.cartesianTriangle() = withIndex().flatMap { x -> take(x.index).map { it to x.value } }
+private fun IntArray.scalarProduct(that: IntArray) = indices.sumOf { i -> this[i].toLong() * that[i] }
 private fun IntProgression.size() = (last - first) / step + 1
 private fun Collection<Int>.mex() = (0..this.size).first { it !in this }
 private fun Long.coerceInInt() = if (this >= Int.MAX_VALUE) Int.MAX_VALUE else if (this <= Int.MIN_VALUE) Int.MIN_VALUE else toInt()
