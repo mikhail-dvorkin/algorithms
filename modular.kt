@@ -15,6 +15,13 @@ private value class Modular(val x: Int) {
 	inline operator fun times(that: Modular) = Modular((x.toLong() * that.x % M).toInt())
 	inline operator fun div(that: Modular) = times(that.inverse())
 	inline fun inverse() = Modular(x.toBigInteger().modInverse(MOD_BIG_INTEGER).toInt())
+	fun pow(p: Int): Modular = when {
+		p < 0 -> this.inverse().pow(-p)
+		p == 0 -> 1.toModularUnsafe()
+		p == 1 -> this
+		p % 2 != 0 -> this.times(this.pow(p - 1))
+		else -> this.pow(p / 2).let { it.times(it) }
+	}
 	override fun toString() = x.toString()
 }
 private fun Int.toModularUnsafe() = Modular(this)
