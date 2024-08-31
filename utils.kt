@@ -93,7 +93,7 @@ private fun setIn(input: String) = System.setIn(input.byteInputStream())
 private val `in` = System.`in`.bufferedReader()
 private val out = System.out.bufferedWriter()
 private fun readln() = `in`.readLine()
-private fun println(vararg msg: Any, sep: String=" ", end: String="\n", flush: Boolean=false) { print(msg.joinToString(sep, "", end)); if (flush) System.out.flush() }
+private fun pyPrint(vararg msg: Any, sep: String=" ", end: String="\n", flush: Boolean=false) { print(msg.joinToString(sep, "", end)); if (flush) System.out.flush() }
 
 fun mainPerTestWithTime() {
 	val tests = readInt()
