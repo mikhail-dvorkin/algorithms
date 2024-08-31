@@ -15,6 +15,10 @@ private fun <T> List<T>.toPair() = get(0) to get(1)
 private inline fun <E> MutableList<E?>.computeIfNull(key: Int, defaultValue: () -> E) = get(key) ?: defaultValue().also { set(key, it) }
 private inline fun <T, R : Comparable<R>> Iterable<T>.minByAndValue(crossinline selector: (T) -> R) = asSequence().map { it to selector(it) }.minBy { it.second }
 private inline fun <T, R : Comparable<R>> Iterable<T>.maxByAndValue(crossinline selector: (T) -> R) = asSequence().map { it to selector(it) }.maxBy { it.second }
+private fun <K> MutableMap<K, Double>.getOrZero(key: K) = getOrDefault(key, 0.0)
+private fun <K> MutableMap<K, Double>.increase(key: K, add: Double) = put(key, getOrZero(key) + add)
+private fun <K> MutableMap<K, Double>.increaseExisting(key: K, add: Double) = put(key, get(key)!! + add)!!
+private fun <K, V> MutableMap<K, V>.clearAndPutAll(from: Map<out K, V>) { clear(); putAll(from) }
 private fun <T> List<T>.shifted(shift: Int) = drop(shift) + take(shift)
 private fun <T> List<T>.allShifts() = List(size) { shifted(it) }
 private fun <T> List<List<T>>.transposed() = List(this[0].size) { i -> map { it[i] } }
@@ -83,6 +87,16 @@ private fun String.parseIntArray(): IntArray {
 	}
 	result[i] = value
 	return result
+}
+
+inline fun <K, V> Iterable<K>.associateWithNotNull(valueSelector: (K) -> V?): Map<K, V> {
+	return associateWithNotNullTo(LinkedHashMap(), valueSelector)
+}
+inline fun <K, V, M : MutableMap<in K, in V>> Iterable<K>.associateWithNotNullTo(destination: M, valueSelector: (K) -> V?): M {
+	for (element in this) {
+		valueSelector(element)?.also { destination[element] = it }
+	}
+	return destination
 }
 
 private val isOnlineJudge = System.getProperty("ONLINE_JUDGE") == "true"
