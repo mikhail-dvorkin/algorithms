@@ -7,6 +7,7 @@ private fun readInts() = readStrings().map { it.toInt() }
 private fun readIntArray() = readln().parseIntArray()
 private fun readLongs() = readStrings().map { it.toLong() }
 
+private inline fun <T> T.letIf(condition: Boolean, block: (T) -> T) = if (condition) block(this) else this
 private operator fun <T> List<T>.component6() = get(5)
 private fun <T> List<T>.getCycled(index: Int) = getOrElse(index) { get(if (index >= 0) index % size else lastIndex - index.inv() % size) }
 private fun <T> Iterable<T>.withReversed() = listOf(toList(), reversed())
@@ -28,6 +29,7 @@ private fun Long.coerceInInt() = if (this >= Int.MAX_VALUE) Int.MAX_VALUE else i
 private fun IntArray.reversedPermutation() = IntArray(size).also { for (i in indices) it[this[i]] = i }
 //private operator fun Int.get(index: Int) = ushr(index) and 1
 private fun Int.bit(index: Int) = ushr(index) and 1
+private fun Long.bit(index: Int) = ushr(index).toInt() and 1
 private fun Int.hasBit(index: Int) = bit(index) != 0
 private fun Int.setBit(index: Int) = or(1 shl index)
 private fun Int.countSignificantBits() = Int.SIZE_BITS - Integer.numberOfLeadingZeros(this)
@@ -38,7 +40,13 @@ private fun decode(code: Long) = (code ushr 32).toInt() to code.toInt()
 private fun decodeShort(code: Int) = (code ushr 16) to (code and 0xFFFF)
 private fun Int.abs() = kotlin.math.abs(this)
 private fun Int.sqr() = this * this
+private fun Double.abs() = kotlin.math.abs(this)
+private fun Double.sqr() = this * this
+private fun Double.ceil() = kotlin.math.ceil(this)
+private fun Double.floor() = kotlin.math.floor(this)
 private infix fun Int.mod(other: Int) = (this % other).let { it + (other and (((it xor other) and (it or -it)) shr 31)) }
+private infix fun Int.ceilDiv(other: Int) = (this + other - 1) / other
+private infix fun Int.upToDiv(other: Int) = (this ceilDiv other) * other
 private tailrec fun gcd(a: Int, b: Int): Int = if (a == 0) b else gcd(b % a, a)
 private fun dividedByGcd(a: Int, b: Int) = gcd(a, b).let { a / it to b / it }
 private fun minusOnePow(i: Int) = 1 - ((i and 1) shl 1)
@@ -51,6 +59,7 @@ private operator fun <T> Iterable<T>.times(count: Int) = (0 until count).flatMap
 private fun CharSequence.toCharArray() = CharArray(this.length) { this[it] }
 private fun CharSequence.sorted() = toCharArray().apply { sort() }.concatToString()
 private fun String(n: Int, init: (Int) -> Char) = buildString(n) { repeat(n) { append(init(it)) } }
+private operator fun (() -> Unit).plus(that: () -> Unit) = { -> this(); that() }
 @Suppress("DEPRECATION", "removal")
 private fun eval(expression: String) = jdk.nashorn.api.scripting.NashornScriptEngineFactory().scriptEngine.eval(expression).toString()
 
