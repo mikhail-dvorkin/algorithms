@@ -64,7 +64,7 @@ private operator fun <T> Iterable<T>.times(count: Int) = (0 until count).flatMap
 private fun CharSequence.toCharArray() = CharArray(this.length) { this[it] }
 private fun CharSequence.sorted() = toCharArray().apply { sort() }.concatToString()
 private fun String(n: Int, init: (Int) -> Char) = buildString(n) { repeat(n) { append(init(it)) } }
-private operator fun (() -> Unit).plus(that: () -> Unit) = { -> this(); that() }
+private operator fun (() -> Unit).plus(that: () -> Unit) = run { this(); that() }
 @Suppress("DEPRECATION", "removal")
 private fun eval(expression: String) = jdk.nashorn.api.scripting.NashornScriptEngineFactory().scriptEngine.eval(expression).toString()
 
