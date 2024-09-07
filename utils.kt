@@ -65,8 +65,8 @@ private fun CharSequence.toCharArray() = CharArray(this.length) { this[it] }
 private fun CharSequence.sorted() = toCharArray().apply { sort() }.concatToString()
 private fun String(n: Int, init: (Int) -> Char) = buildString(n) { repeat(n) { append(init(it)) } }
 private operator fun (() -> Unit).plus(that: () -> Unit) = run { this(); that() }
-@Suppress("DEPRECATION", "removal")
-private fun eval(expression: String) = jdk.nashorn.api.scripting.NashornScriptEngineFactory().scriptEngine.eval(expression).toString()
+//@Suppress("DEPRECATION", "removal")
+//private fun eval(expression: String) = jdk.nashorn.api.scripting.NashornScriptEngineFactory().scriptEngine.eval(expression).toString()
 
 private fun IntRange.binarySearch(predicate: (Int) -> Boolean): Int {
 	var (low, high) = this.first to this.last // must be false ... must be true
