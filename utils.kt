@@ -38,6 +38,7 @@ private fun Long.bit(index: Int) = ushr(index).toInt() and 1
 private fun Int.hasBit(index: Int) = bit(index) != 0
 private fun Int.setBit(index: Int) = or(1 shl index)
 private fun Int.countSignificantBits() = Int.SIZE_BITS - Integer.numberOfLeadingZeros(this)
+private fun log2ceil(n: Int) = (n - 1).countSignificantBits()
 private fun Int.oneIndices() = (0 until countSignificantBits()).filter { bit(it) != 0 }
 private infix fun Int.with(that: Int) = (toLong() shl 32) or that.toUInt().toLong()
 private infix fun Int.withShort(that: Int) = shl(16) or that
@@ -55,6 +56,8 @@ private infix fun Int.upToDiv(other: Int) = (this ceilDiv other) * other
 private tailrec fun gcd(a: Int, b: Int): Int = if (a == 0) b else gcd(b % a, a)
 private fun dividedByGcd(a: Int, b: Int) = gcd(a, b).let { a / it to b / it }
 private fun minusOnePow(i: Int) = 1 - ((i and 1) shl 1)
+private fun factorialBigInteger(n: Int): java.math.BigInteger = if (n <= 1) 1.toBigInteger() else factorialBigInteger(n - 1) * n.toBigInteger()
+private fun cnkBigInteger(n: Int, k: Int) = (factorialBigInteger(n) / factorialBigInteger(k) / factorialBigInteger(n - k))
 private infix fun Int.towards(to: Int) = if (to > this) this..to else this downTo to
 private infix fun Double.isNot(other: Double) = kotlin.math.abs(this - other) > 1e-9
 private fun Boolean.toInt() = if (this) 1 else 0
