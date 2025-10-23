@@ -177,12 +177,12 @@ public class Geometry {
 				&& orientation(x2, y2, x3, y3, x0, y0) * orientation(x2, y2, x3, y3, x1, y1) == -1;
 	}
 	
-	static boolean linearSegmentsIntersectNonStricly(int a, int b, int c, int d) {
+	static boolean linearSegmentsIntersectNonStrictly(int a, int b, int c, int d) {
 		return Math.max(Math.min(a, b), Math.min(c, d)) <= Math.min(Math.max(a, b), Math.max(c, d));
 	}
 	
-	static boolean segmentsIntersectNonStricly(int x0, int y0, int x1, int y1, int x2, int y2, int x3, int y3) {
-		return linearSegmentsIntersectNonStricly(x0, x1, x2, x3) && linearSegmentsIntersectNonStricly(y0, y1, y2, y3) &&
+	static boolean segmentsIntersectNonStrictly(int x0, int y0, int x1, int y1, int x2, int y2, int x3, int y3) {
+		return linearSegmentsIntersectNonStrictly(x0, x1, x2, x3) && linearSegmentsIntersectNonStrictly(y0, y1, y2, y3) &&
 				orientation(x0, y0, x1, y1, x2, y2) * orientation(x0, y0, x1, y1, x3, y3) <= 0 && 
 				orientation(x2, y2, x3, y3, x0, y0) * orientation(x2, y2, x3, y3, x1, y1) <= 0;
 	}
