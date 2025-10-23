@@ -64,6 +64,7 @@ private fun Boolean.toInt() = if (this) 1 else 0
 private fun <T> Boolean.iif(onTrue: T, onFalse: T) = if (this) onTrue else onFalse
 private fun BooleanArray.getOrFalse(index: Int) = getOrNull(index) ?: false
 private operator fun <T> Iterable<T>.times(count: Int) = (0 until count).flatMap { this }
+private fun <T> List<T>.repeatToLength(length: Int) = List(length) { this[it % this.size] }
 private fun CharSequence.toCharArray() = CharArray(this.length) { this[it] }
 private fun CharSequence.sorted() = toCharArray().apply { sort() }.concatToString()
 private fun String(n: Int, init: (Int) -> Char) = buildString(n) { repeat(n) { append(init(it)) } }
